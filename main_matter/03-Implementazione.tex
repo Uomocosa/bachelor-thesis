@@ -57,14 +57,14 @@ Tramite questa configurazione è possibile collegare l'Arduino Nano al PC per la
 
 \newpage{}
 
-\begin{minted}{Arduino}
+\begin{lstlisting}[language=Arduino]
 void loop(){ // Lettura di due sensori
     String value_on_pollice = String(AnalogRead(A0));
     String value_on_medio = String(AnalogRead(A1));
     String timestamp = String(millis());
     Serial.println(timestamp + "," + value_on_pollice + "," + value_on_medio)
 }
-\end{minted}
+\end{lstlisting}
 
 
 
@@ -73,11 +73,11 @@ void loop(){ // Lettura di due sensori
 
 \subsection{Protocollo Edge Impulse} \label{sezione 2-1-1}
 Il formato per la scrittura dei dati sul seriale:
-\begin{minted}{Arduino}
+\begin{lstlisting}[language=Arduino]
 timestamp + "," + value_on_pollice + "," + value_on_medio
-\end{minted}
+\end{lstlisting}
 Non è stato scelto a caso, di fatti il servizio Edge Impulse richiede che i fogli ".csv" abbiano il seguente protocollo o formato, per la successiva lettura dei dati:
-\begin{minted}{html}
+\begin{lstlisting}[language=HTML]
 timestamp, name_value_1, name_value_2, name_value_3, name_value_4
 0, 23.34, 2131.23, 321.23, 232.4
 12, 23.34, 2131.23, 321.23, 232.4
@@ -85,7 +85,7 @@ timestamp, name_value_1, name_value_2, name_value_3, name_value_4
 45, 26.24, 2056.40, 321.23, 567.9
 54, 25.38, 1233.23, 321.23, 567.4
 ...
-\end{minted}
+\end{lstlisting}
 Questo formato sarà poi creato per intero dallo script python di cui parlerò nella prossima sezione, in ogni caso, è necessario che i fogli ".csv" abbiano tutti come prima colonna il "timestamp", così che Edge Impulse possa dare ad ogni dato fornitogli un marchio temporale, ecco il perché dell'omonima variabile durante la scrittura sul seriale (scritta appunto per prima).\\
 Successivamente il sito si aspetta tutti i dati raccolti dai vari sensori, che vengono appunto scritti sul seriale, dopo il timestamp.
 
@@ -110,7 +110,7 @@ Di seguito alcune foto su come ho incollato calamita e sensori, che poi colleghe
 \section{Script Python per la Scrittura Automatica di Fogli ".csv"} \label{sezione 2-2}
 Ricevendo i dati tramite seriale è possibile utilizzare una libreria python "pyserial" per la lettura di questi; il procedimento è il seguente:
 una volta collegata la scheda Arduino ad una porta seriale ad esempio "COM3", possiamo creare uno script python che utilizza la libreria o modulo "pyserial" in questo modo:
-\begin{minted}{python}
+\begin{lstlisting}[language=Python]
 import serial
 
 MAX_CICLES = 100
@@ -129,16 +129,16 @@ for _ in range(MAX_CICLES):
     
     if data != EMPTY_DATA_SRING:
         return data[INITIAL_DATA_TO_INGNORE:-FINAL_DATA_TO_INGNORE]
-\end{minted}
+\end{lstlisting}
 \myNOTE{Questo breve script premette solo di leggere una singola riga dal serial. \\
 Andrà ripetuto più volte per leggere tutti i dati passati dall'Arduino.}
 \par{}Una volta ricevuti i dati dall'Arduino, e opzionalmente salvati in una variabile, sarà possibile scriverli su un nuovo foglio ".csv".\\
 Decidendo il percorso dove salvare il file, ad esempio\\ "\textit{C:$\backslash{}$Users$\backslash{}$Amministratore$\backslash{}$Cartella\_Files\_CSV$\backslash{}$nuovo\_file.csv}", possiamo creare il file e trascriverci i dati da una variabile utilizzando la funzione python "open(...)":
-\begin{minted}{python}
+\begin{lstlisting}[language=Python]
 absolute_path = "C:\Users\Amministratore\Cartella_Files_CSV\nuovo_file.csv"
 with open(absolute_path, "w") as file:
     file.write(dati_raccolti_dallArduino_tramite_la_precedente_funzione)
-\end{minted}
+\end{lstlisting}
 
 È possibile, ovviamente, ripetere tutto il procedimento quante volte vogliamo, finendo con\comment{pordandoci ad}  avere a disposizione molti fogli ".csv" con all'interno i dati ricavati dai sensori tramite la scheda Arduino, dati che saranno la base dell'addestramento della rete neurale.\\
 
@@ -206,7 +206,7 @@ Una volta scaricata la libreria da "Edge Impulse", la possiamo includere su un n
 \newpage{}
 
 In questo esempio ci è consigliato di modificare, o meglio, riempire il vettore "features[ ]" con i dati presi dai sensori, quindi utilizzando lo stesso metodo per la raccolta dati, riempiamo il vettore:
-\begin{minted}{Arduino}
+\begin{lstlisting}[language=Arduino]
 void loop(){
     int length_featrues = sizeof(features)/sizeof(float);
     for(int i = 1; i < length_features; i++){
@@ -214,9 +214,9 @@ void loop(){
     }
     features[length_featrues-1] = new_data_just_aquired
 }
-\end{minted}
+\end{lstlisting}
 Dopodiché nell'esempio il vettore viene passato in una serie di funzioni per poter poi essere usato dal classificatore, o rete neurale:
-\begin{minted}{Arduino}
+\begin{lstlisting}[language=Arduino]
     int raw_feature_get_data(size_t offset, size_t length, float *out_ptr) {
         memcpy(out_ptr, features + offset, length * sizeof(float));
         return 0;
@@ -233,20 +233,20 @@ Dopodiché nell'esempio il vettore viene passato in una serie di funzioni per po
     &features_signal, &result, false /* debug */);
     
     // -----------------------------------------------------------------------
-    // Otteniamo così: i tempi in ms impiegati del classificatore
+    // TEMPI DEL CLASSIFICATORE
     // result.timing.dsp
     // result.timing.classification
     // result.timing.anomaly
     
-    // Inoltre:
-    // result.classification[ix].label //Ritorna una stringa con il label
-    // result.classification[ix].value //Valore della confidenza tra 0 ed 1
-    // result.anomaly //Valore dell'anomalia se implementata precedentemente
-\end{minted}
+    // DETTAGLI:
+    // result.classification[ix].label
+    // result.classification[ix].value
+    // result.anomaly
+\end{lstlisting}
 
-Quindi con \mintinline{arduino}{result.classification[ix].label}, \mintinline{arduino}{result.classification[ix].value}, e \mintinline{arduino}{result.anomaly} è possibile implementare il resto del codice:
+Quindi con \lstinline{result.classification[ix].label}, \lstinline{result.classification[ix].value}, e \lstinline{result.anomaly} è possibile implementare il resto del codice:
 
-\begin{minted}{Arduino}
+\begin{lstlisting}[language=Arduino]
     if(result.classification[ix].label == "SCHIOCCO_DI_DITA"){
         if(result.classification[ix].value > 0.9){
             // Light the leds
@@ -262,10 +262,10 @@ Quindi con \mintinline{arduino}{result.classification[ix].label}, \mintinline{ar
             digitalWrite(A2, LOW);
         }
     }
-\end{minted}
+\end{lstlisting}
 
 \myNOTE{
-In questo caso \mintinline{arduino}{result.anomaly} non è stata implementata. In caso si volesse implementare\\
+In questo caso \lstinline{result.anomaly} non è stata implementata. In caso si volesse implementare\\
 è possibile, tornando alla costruzione dell'Impulso nella sezione precedente, aggiungendo\\
 un nuovo "Blocco di Apprendimento" chiamato "Anomaly Detection (K-means)" che\\ 
 tramite un algoritmo di K-clustering ritorna un valore, sempre tra 0 ed 1, indicativo di\\ 

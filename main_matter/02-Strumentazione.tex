@@ -76,7 +76,7 @@ Possiamo utilizzarli direttamente nel codice Arduino, tramite l'Arduino IDE[\rif
 
 \subsection{Esempio [Libreria LSM9DS1: Accelerometro]}
 La libreria LSM9DS1 corrisponde all'accelerometro montato sull'Arduino, dopo averla installata tramite il gestore librerie dall'IDE, tramite il codice che vediamo qua sotto, è possibile scrivere sul monitor seriale i valori ottenuti dall'accelerometro.
-\begin{minted}{Arduino}
+\begin{lstlisting}[language=Arduino]
 #include <Arduino_LSM9DS1.h>
 void setup(){
     Serial.begin(115200);
@@ -91,7 +91,7 @@ void loop(){
     float x, y, z
     IMU.readAcceleration(x, y, z);
 }//end loop
-\end{minted}
+\end{lstlisting}
 \noindent\makebox[\linewidth]{\rule{15mm}{.4mm}}
 
 

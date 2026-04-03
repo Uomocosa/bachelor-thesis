@@ -16,7 +16,11 @@
 \usepackage{blindtext}
 \usepackage[nottoc]{tocbibind} % to add bibliography in the table of contents
 % links
-\usepackage{hyperref}
+\usepackage[colorlinks = true,
+            linkcolor = black,
+            urlcolor  = blue,
+            citecolor = blue,
+            anchorcolor = blue]{hyperref}
 
 
 \usepackage{xcolor,colortbl} % for todos and comments
@@ -56,7 +60,6 @@
 \usepackage[bottom]{footmisc}
 \usepackage{setspace}
 \usepackage{url}
-\usepackage{hyperref}
 \setlength{\footnotemargin}{0mm}
 \setlength{\footnotesep}{5mm}
 %\renewcommand{\footnotelayout}{\setstretch{1.5}}% Footnotes are \setstretch{1.5}
@@ -71,7 +74,32 @@
 \input{ESEMPI DI CODICE/funzioni}
 
 % Per scrivere codice matlab e php (o altro)
-\usepackage{minted}
+\usepackage{listings}
+
+% Arduino language definition for listings
+\lstdefinelanguage{Arduino}{
+  morekeywords={void, int, float, double, char, boolean, if, else, for, while, do, return, break, continue, switch, case, default, const, static, digitalWrite, digitalRead, analogWrite, analogRead, Serial, begin, println, print, setup, loop},
+  morecomment=[l]{//},
+  morecomment=[s]{/*}{*/},
+  morestring=[b]{"},
+  sensitive=false
+}
+
+\lstset{
+  frame=single,
+  basicstyle=\ttfamily\small,
+  keywordstyle=\color{blue},
+  commentstyle=\color{green},
+  stringstyle=\color{red},
+  numbers=left,
+  numberstyle=\tiny,
+  stepnumber=1,
+  numbersep=5pt,
+  showspaces=false,
+  showstringspaces=false,
+  breaklines=true,
+  tabsize=4
+}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
