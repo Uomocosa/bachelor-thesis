@@ -1,0 +1,34 @@
+
+\usepackage{xargs}
+
+
+%\NewDocumentCommand{\foocmd}{ O{default1} O{default2} m }{%code}
+\NewDocumentCommand{\immagine}{O{H} O{width=\textwidth} m m}{
+    \begin{figure}[#1]
+    \caption{#3}
+    \centering
+    \includegraphics[#2]{#4}
+    \end{figure}
+}
+
+\NewDocumentCommand{\nota}{m o}
+{\IfNoValueTF{#2}
+%If True:
+{\footnote{#1}}
+%If False:
+{\urldef\myurl\url{#2}\footnote{\raggedright{#1: [\myurl]}
+}}}
+%\newcommand{\citAAAA}{\nota{Testo} [link]}
+
+
+%colora link
+\usepackage[colorlinks = true,
+            linkcolor = blue,
+            urlcolor  = blue,
+            citecolor = blue,
+            anchorcolor = blue]{hyperref}
+
+\newcommand{\MYhref}[3][blue]{\href{#2}{\color{#1}{#3}}}%
+\newcommand{\riferimento}[3][blue]{\hyperref[#2]{\color{#1}{#3}}}%
+%~ES.:\MYhref{http://www.google.com}{Google}
+%~ES.:\MYhref[brown]{http://www.google.com}{Google}

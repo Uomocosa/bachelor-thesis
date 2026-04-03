@@ -1,0 +1,143 @@
+
+
+\documentclass[11pt, a4paper, twoside, openright]{report}
+
+
+
+\usepackage[utf8x]{inputenc}
+\usepackage{indentfirst}
+\usepackage{graphicx} \graphicspath{ {figures/} }
+\usepackage{subfig}
+\usepackage{pdfpages}
+\usepackage[italian]{babel}
+\usepackage{fancyhdr}
+\usepackage{setspace} % for onehalfspacing
+\usepackage[a4paper, width=155mm, top=35mm, bottom=35mm, bindingoffset=5mm]{geometry} % Page margins
+\usepackage{blindtext}
+\usepackage[nottoc]{tocbibind} % to add bibliography in the table of contents
+% links
+\usepackage{hyperref}
+
+
+\usepackage{xcolor,colortbl} % for todos and comments
+\usepackage{enumitem} % for lists
+\usepackage{physics}
+\usepackage{bbold} % for identity matrix symbol \mathbb
+\usepackage{amsmath} % long equations
+\usepackage{amssymb}
+\usepackage{mathtools}
+\usepackage{matlab-prettifier}
+\usepackage{float} % to fix figures position with option [H]
+\usepackage[font=footnotesize]{caption} % for figures captions
+\usepackage{subcaption}  % for subfigures captions
+\usepackage{cleveref}  % for clever references
+\usepackage[disable]{todonotes}   % TODO notes. use [disable] to hide notes. use [draft] to enable them
+
+\newcommand{\conj}[1]{\overline{#1}} % for complex conjugate
+
+\linespread{1.25}
+
+%figure
+\usepackage{wrapfig}
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[LE, RO]{\thepage}
+%\fancyhead[RO]{\thepage}
+\fancyhead[LO]{\slshape \nouppercase \rightmark}
+\fancyhead[RE]{\slshape \nouppercase \leftmark}
+\fancyfoot{}
+\renewcommand{\headrulewidth}{0.3pt}
+%\renewcommand{\footrulewidth}{0.3pt}
+
+%%FOOTNOTES
+%reset counter of footnotes at every section
+\usepackage{tabularx}
+\usepackage[bottom]{footmisc}
+\usepackage{setspace}
+\usepackage{url}
+\usepackage{hyperref}
+\setlength{\footnotemargin}{0mm}
+\setlength{\footnotesep}{5mm}
+%\renewcommand{\footnotelayout}{\setstretch{1.5}}% Footnotes are \setstretch{1.5}
+%\makeatletter
+%\@addtoreset{footnote}{section}
+%\makeatother
+
+%\newpage \null \thispagestyle{empty} \newpage % repair the discrepancy numbering pages
+%\shipout\null % blank page unnumbered
+
+% FUNZIONI PERSONALIZZATE
+\input{ESEMPI DI CODICE/funzioni}
+
+% Per scrivere codice matlab e php (o altro)
+\usepackage{minted}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\begin{document}
+
+%\pagenumbering{roman}
+\pagenumbering{gobble}
+
+%%%%% Title %%%%%
+\input{front_matter/frontespizio}
+%\stepcounter{page}
+
+\shipout\null % blank page unnumbered
+
+%\clearpage
+ %%%%% Dedication %%%%%
+%\begin{flushleft}
+%	\null\vspace{\stretch{1}}
+%\end{flushleft}
+
+%
+
+%%%%% Pages Numbers %%%%%
+\pagestyle{fancy}
+\pagenumbering{arabic}
+\setcounter{page}{1}
+
+
+%%%%% Contents %%%%%
+\tableofcontents
+%\cleardoublepage
+\let\cleardoublepage\clearpage
+
+%%%%% Chapters %%%%%
+
+\addcontentsline{toc}{chapter}{Introduzione}
+\chapter*{Introduzione}
+%\section*{Unnumbered Section}
+%\part*{Introduction}
+\input{main_matter/01-Introduzione}
+\let\cleardoublepage\clearpage
+
+\chapter{Strumentazione}
+\input{main_matter/02-Strumentazione}
+\clearpage\null\thispagestyle{empty}
+
+\chapter{Implementazione}
+\input{main_matter/03-Implementazione}
+\clearpage\null\thispagestyle{empty}
+
+\addcontentsline{toc}{chapter}{Conclusioni}
+\chapter*{Conclusioni}
+\input{main_matter/98-Conclusioni}
+
+\addcontentsline{toc}{chapter}{Bibliografia}
+\chapter*{Bibliografia}
+\input{main_matter/100-Bibliografia}
+
+\addcontentsline{toc}{chapter}{Ringraziamenti}
+\chapter*{Ringraziamenti}
+\input{main_matter/101-Ringraziamenti}
+
+%\chapter{TODO NAME OF CODE CHAPTER}
+%\input{main_matter/99-All-Codes_Chapter}
+
+\end{document}

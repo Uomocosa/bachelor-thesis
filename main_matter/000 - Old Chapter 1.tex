@@ -1,0 +1,104 @@
+
+
+\newcommand{\comment}[1]{}
+\newcommand{\myBigBreak}{\\[5mm]}
+
+
+\label{01-chapter}
+
+%%%%% Capitolo 2 %%%%%
+
+\section{Introduzione al capitolo} \label{sezione 1-1}
+TODO descrizione del capitolo\par
+
+
+
+
+
+\section{Che cos'è il Machine Learning} \label{sezione 1-2}
+\comment{
+Imagine you own a machine that manufactures widgets. Sometimes it breaks down,
+and it’s expensive to repair. Perhaps if you collected data about the machine during
+operation, you might be able to predict when it is about to break down and halt oper‐
+ation before damage occurs. For instance, you could record its rate of production, its
+temperature, and how much it is vibrating. It might be that some combination of
+these factors indicates an impending problem. But how do you figure it out?
+This is an example of the sort of problem machine learning is designed to solve. Fun‐
+damentally, machine learning is a technique for using computers to predict things
+based on past observations. We collect data about our factory machine’s performance
+and then create a computer program that analyzes that data and uses it to predict
+future states.
+}
+/comment{
+Prendiamo ad esempio un qualsiasi gesto compiuto con il movimento di una mano, se collezioniamo abbastanza dati durante il movimento, forse è possibile far capire ad una macchina quale movimento è stato realizzato, \comment{ovvero classificare i dati raccolti con uno specifico label, ad esempio tenendo il pollice alzato e il resto della mano chiusa a pugno potremmo ricevere un label "OK", oppure tenendo la mano aperta e scuotendola ricevere "CIAO",} potremmo registrare ad esempio la velocità e accelerazione di alcune dita e del polso, e una combinazione di questi fattori potrebbe portarci alla soluzione che desideriamo, ma in che modo?\\
+Questo è un esempio del genere di problemi, che il machine learning è stato progettato per risolvere.\\
+Utilizzando le osservazioni passate, fornendo ingressi ed uscite, (riprendendo l'esempio di prima i dati degli accelerometri come ingressi, ed il nome del gesto come uscita) il programma di machine learning è in grado analizzare questi dati, e creare un modello che possa generalizzare a quali uscite corrispondono nuovi ingressi. 
+\myBigBreak
+}
+\comment{
+Creating a machine learning program is different from the usual process of writing
+code. In a traditional piece of software, a programmer designs an algorithm that takes
+an input, applies various rules, and returns an output. The algorithm’s internal opera‐
+tions are planned out by the programmer and implemented explicitly through lines
+of code. To predict breakdowns in a factory machine, the programmer would need to
+understand which measurements in the data indicate a problem and write code that
+deliberately checks for them.
+}
+/comment{
+Scrivere un programma di machine learning è molto diverso da scrivere un tipico codice, tradizionalmente dati degli ingressi , otteniamo delle uscite attraverso una serie di funzioni e regole date dal programmatore, i dati in ingresso vengono processati e restituiti come nuovi dati in output. Tutte le funzioni o regole, che decidono come i dati dovranno essere modificate, sono definite dal programmatore, ed implementate esplicitamente attraverso righe di codice.\\
+Per capire a quale gesto, corrisponde un vettore di dati ottenuti da vari accelerometri, il programmatore deve capire quali misure corrispondono a quali gesti, e scrivere codice che deliberatamente cerca per queste misure.
+\myBigBreak
+}
+
+\comment{
+This approach works fine for many problems. For example, we know that water boils
+at 100°C at sea level, so it’s easy to write a program that can predict whether water is
+boiling based on its current temperature and altitude. But in many cases, it can be
+difficult to know the exact combination of factors that predicts a given state. To con‐
+tinue with our factory machine example, there might be various different combina‐
+tions of production rate, temperature, and vibration level that might indicate a
+problem but are not immediately obvious from looking at the data.
+}
+
+\comment{
+Il tradizionale procedimento funziona bene per molti problemi come ad esempio capire se un oggetto è in movimento o meno, semplicemente se l'accelerazione letta dell'accelerometro cambia possiamo definire l'oggetto come in "movimento". Ma in molti altri casi è difficile conoscere quale combinazione di fattori per predire lo stato del sistema, ad esempio quando i dati ricevuti dai sensori sono sull'ordine delle decine, ovvero quando non è possibile facilmente determinare la soluzione guardando i dati.
+\myBigBreak
+}
+
+\comment{
+In caso si scelga di utilizzare un algoritmo di machine learning, non è più il programmatore a creare le regole per il processo dei dati, ma la macchina decide da sola un modello che meglio approssima la relazione tra ingressi ed uscite fornitegli.\\
+Il processo di apprendimento, dove l'algoritmo decide i pesi del modello, è appunto la parte di "learning".\\
+\myBigBreak
+}
+
+\comment{
+12 | Chapter 3: Getting Up to Speed on Machine Learning
+To create a machine learning program, a programmer feeds data into a special kind of
+algorithm and lets the algorithm discover the rules. This means that as programmers,
+we can create programs that make predictions based on complex data without having
+to understand all of the complexity ourselves. The machine learning algorithm builds
+a model of the system based on the data we provide, through a process we call train‐
+ing. The model is a type of computer program. We run data through this model to
+make predictions, in a process called inference.
+There are many different approaches to machine learning. One of the most popular is
+deep learning, which is based on a simplified idea of how the human brain might
+work. In deep learning, a network of simulated neurons (represented by arrays of
+numbers) is trained to model the relationships between various inputs and outputs.
+Different architectures, or arrangements of simulated neurons, are useful for different
+tasks. For instance, some architectures excel at extracting meaning from image data,
+while other architectures work best for predicting the next value in a sequence.
+The examples in this book focus on deep learning, since it’s a flexible and powerful
+tool for solving the types of problems that are well suited to microcontrollers. It
+might be surprising to discover that deep learning can work even on devices with
+limited memory and processing power. In fact, over the course of this book, you’ll
+learn how to create deep learning models that do some really amazing things but that
+still fit within the constraints of tiny devices.
+The next section explains the basic workflow for creating and using a deep learning
+model.
+}
+
+
+
+
+
+

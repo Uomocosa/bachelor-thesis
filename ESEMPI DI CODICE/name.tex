@@ -1,0 +1,80 @@
+% figure:
+\begin{figure}[h] %h : ottimizza lo spazio, H : mette figura nel punto specificato nel codice
+\caption{Esempio di switch su connessioni TX ed RX del modulo ESP8266}
+\centering
+\includegraphics[width=\textwidth]{figures/SwitchEs.png}
+\end{figure}
+%-----------------------------------------------------------------------
+
+%riferimento ad una parte di testo o label
+%colorato blu:
+\riferimento{riferimento}{testo cliccabile}
+%colorato a piacere
+\riferimento[colore]{riferimento}{testo cliccabile}
+%normale
+\hyperref[riferiento]{testo cliccabile}
+%-----------------------------------------------------------------------
+
+%tabella
+\begin{center} \begin{tabular}{|c l|} %c = center, l = left
+    \hline
+    Colore del jumper & Collegamento \\ [.5ex]
+    \hline\hline
+    tutti i jumper neri & collegati a GND \\
+    rosso & Pin ESP: Vcc a 3.3V \\
+    blu & Pin ESP: CH-PD a 3.3V \\
+    verde & Pin ESP: RX al Pin Arduino: 10 \\
+    arancione & Pin ESP: TX al Pin Arduino: 11 \\
+    \hline
+\end{tabular} \end{center}
+%-----------------------------------------------------------------------
+
+%definizione variabile o funzione
+\newcommand \variabileDiProva {55}
+\newcommand {\funzioneDiProva}[2] {argomenti = #1 e #2}
+%-----------------------------------------------------------------------
+
+%nota a piè pagina
+\newcommand{\citAAA}{\nota{Nome} [https://www.link]}
+%-----------------------------------------------------------------------
+
+%scrivere testo con _ o %
+\verb|porva_p_o_r_v%%%%a|
+%-----------------------------------------------------------------------
+
+%piccola riga divisoria
+\noindent\makebox[\linewidth]{\rule{15mm}{.4mm}}
+%-----------------------------------------------------------------------
+
+%capitoli, sezioni, ecc...
+\begin{itemize}[noitemsep]
+    \item{}
+    \item{}
+\end{itemize}
+%-----------------------------------------------------------------------
+
+%codice programmazione ARUDINO
+\begin{minted}{Arduino}
+
+\end{minted}
+%divisorio opzionale
+\noindent\makebox[\linewidth]{\rule{15mm}{.4mm}}
+%-----------------------------------------------------------------------
+
+%codice programmazione PHP
+\begin{minted}{php}
+<?php
+
+?>
+\end{minted}
+
+
+%-----------------------------------------------------------------------
+
+%esempio
+
+%-----------------------------------------------------------------------
+
+%esempio
+
+%-----------------------------------------------------------------------
